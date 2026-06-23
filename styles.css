@@ -1,16 +1,20 @@
 :root {
   color-scheme: dark;
-  --bg: #101214;
-  --panel: #1a1f24;
-  --panel-2: #20262c;
-  --text: #f2f6f5;
-  --muted: #a9b5b3;
-  --line: #334049;
+  --bg: #07090c;
+  --panel: #151a20;
+  --panel-2: #1d242c;
+  --text: #f5f7f4;
+  --muted: #aeb8bd;
+  --line: #34414d;
   --green: #57d48a;
   --yellow: #f2c84b;
   --orange: #ff8a3d;
   --red: #ff5757;
   --blue: #65b7ff;
+  --clemson-orange: #f56600;
+  --clemson-purple: #522d80;
+  --alert-color: var(--green);
+  --alert-rgb: 87, 212, 138;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -25,10 +29,62 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(rgba(16, 18, 20, 0.82), rgba(16, 18, 20, 0.96)),
-    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=80")
-      center / cover fixed;
+    linear-gradient(rgba(7, 9, 12, 0.86), rgba(7, 9, 12, 0.96)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(101, 183, 255, 0.06) 0,
+      rgba(101, 183, 255, 0.06) 1px,
+      transparent 1px,
+      transparent 76px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(245, 102, 0, 0.055) 0,
+      rgba(245, 102, 0, 0.055) 1px,
+      transparent 1px,
+      transparent 76px
+    ),
+    radial-gradient(circle at 72% 18%, rgba(82, 45, 128, 0.3), transparent 32%),
+    radial-gradient(circle at 15% 20%, rgba(245, 102, 0, 0.16), transparent 28%),
+    var(--bg);
   color: var(--text);
+}
+
+body.state-clear {
+  --alert-color: var(--green);
+  --alert-rgb: 87, 212, 138;
+}
+
+body.state-watch {
+  --alert-color: var(--yellow);
+  --alert-rgb: 242, 200, 75;
+}
+
+body.state-warning {
+  --alert-color: var(--orange);
+  --alert-rgb: 255, 138, 61;
+}
+
+body.state-danger {
+  --alert-color: var(--red);
+  --alert-rgb: 255, 87, 87;
+}
+
+body.state-standby {
+  --alert-color: var(--blue);
+  --alert-rgb: 101, 183, 255;
+}
+
+.alert-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  border: 10px solid rgba(var(--alert-rgb), 0.72);
+  box-shadow:
+    inset 0 0 34px rgba(var(--alert-rgb), 0.42),
+    0 0 38px rgba(var(--alert-rgb), 0.36);
+  animation: frame-breathe 3.8s ease-in-out infinite;
 }
 
 button,
@@ -54,7 +110,7 @@ select {
 
 .eyebrow {
   margin: 0 0 12px;
-  color: var(--blue);
+  color: var(--clemson-orange);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -137,7 +193,7 @@ h2 {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
   margin: 22px 0;
 }
@@ -159,7 +215,9 @@ h2 {
 }
 
 .metric.primary {
-  background: rgba(32, 38, 44, 0.96);
+  background:
+    linear-gradient(135deg, rgba(245, 102, 0, 0.18), rgba(32, 38, 44, 0.96)),
+    rgba(32, 38, 44, 0.96);
 }
 
 .metric-label,
@@ -180,6 +238,64 @@ h2 {
   display: grid;
   grid-template-columns: 420px minmax(0, 1fr);
   gap: 14px;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.legend-item {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  align-items: center;
+  padding: 13px;
+  background: rgba(21, 26, 32, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.legend-item strong {
+  line-height: 1.1;
+}
+
+.legend-item span:last-child {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.swatch {
+  width: 18px;
+  height: 18px;
+  grid-row: 1 / span 2;
+  border-radius: 50%;
+  box-shadow: 0 0 18px currentColor;
+}
+
+.swatch.clear {
+  color: var(--green);
+  background: var(--green);
+}
+
+.swatch.watch {
+  color: var(--yellow);
+  background: var(--yellow);
+}
+
+.swatch.warning {
+  color: var(--orange);
+  background: var(--orange);
+}
+
+.swatch.danger {
+  color: var(--red);
+  background: var(--red);
 }
 
 .panel {
@@ -285,6 +401,17 @@ select {
   }
 }
 
+@keyframes frame-breathe {
+  0%,
+  100% {
+    opacity: 0.46;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 880px) {
   .hero,
   .panel-row {
@@ -298,6 +425,10 @@ select {
   .dashboard-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .legend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 560px) {
@@ -307,7 +438,8 @@ select {
   }
 
   .dashboard-grid,
-  .split {
+  .split,
+  .legend {
     grid-template-columns: 1fr;
   }
 
