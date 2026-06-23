@@ -6,7 +6,8 @@
     <title>Clemson Lightning Dashboard</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="state-standby">
+    <div class="alert-frame" aria-hidden="true"></div>
     <main class="shell">
       <section class="hero" aria-label="Lightning status">
         <div class="hero-copy">
@@ -41,10 +42,45 @@
         </article>
 
         <article class="metric">
+          <span class="metric-label">WBGT</span>
+          <strong id="wbgtValue">--</strong>
+          <span id="wbgtDetail">Checking heat stress</span>
+        </article>
+
+        <article class="metric">
+          <span class="metric-label">WBGT trend</span>
+          <strong id="wbgtTrend">--</strong>
+          <span id="wbgtTrendDetail">Needs observation history</span>
+        </article>
+
+        <article class="metric">
           <span class="metric-label">Last update</span>
           <strong id="lastUpdate">--</strong>
           <span id="dataMode">Live mode</span>
         </article>
+      </section>
+
+      <section class="legend" aria-label="Lightning color legend">
+        <div class="legend-item">
+          <span class="swatch clear"></span>
+          <strong>Green</strong>
+          <span>Good to go</span>
+        </div>
+        <div class="legend-item">
+          <span class="swatch watch"></span>
+          <strong>Yellow</strong>
+          <span>Lightning within 30 miles</span>
+        </div>
+        <div class="legend-item">
+          <span class="swatch warning"></span>
+          <strong>Orange</strong>
+          <span>Within 15 miles or rapidly approaching</span>
+        </div>
+        <div class="legend-item">
+          <span class="swatch danger"></span>
+          <strong>Red</strong>
+          <span>Within 8 miles</span>
+        </div>
       </section>
 
       <section class="panel-row">
@@ -55,7 +91,12 @@
           </div>
 
           <label>
-            WeatherStem token
+            Private proxy URL
+            <input id="proxyUrl" type="url" autocomplete="off" placeholder="https://your-worker.workers.dev" />
+          </label>
+
+          <label>
+            WeatherStem token for local testing
             <input id="authToken" type="password" autocomplete="off" placeholder="Paste token for this browser" />
           </label>
 
@@ -84,7 +125,7 @@
               <input id="simulateMode" type="checkbox" />
               <span>Simulation mode</span>
             </label>
-            <span id="savedNotice">Token is stored only in this browser.</span>
+            <span id="savedNotice">Use a proxy to keep the token hidden.</span>
           </div>
         </form>
 
