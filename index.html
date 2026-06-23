@@ -12,12 +12,24 @@
       <section class="hero" aria-label="Lightning status">
         <div class="hero-copy">
           <p class="eyebrow">Memorial Stadium Lightning Monitor</p>
+          <p class="location">Clemson, SC</p>
           <h1 id="statusTitle">Checking lightning...</h1>
           <p id="statusText" class="lede">Waiting for the first WeatherStem reading.</p>
+          <p class="data-credit">
+            Lightning and WBGT data powered by
+            <a href="https://www.weatherstem.com/" target="_blank" rel="noopener">WeatherStem</a>
+          </p>
         </div>
         <div class="stadium-signal" id="stadiumSignal" aria-label="Simulated stadium light status">
+          <div class="signal-ring" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div class="signal-core">
-            <span id="signalLabel">Standby</span>
+            <span class="signal-kicker">Stadium Light Status</span>
+            <strong id="signalLabel">Standby</strong>
+            <span class="signal-note">Border and beacon follow lightning alert level</span>
           </div>
         </div>
       </section>
@@ -92,6 +104,11 @@
           <div class="strike-list" id="strikeList"></div>
         </section>
       </section>
+
+      <footer class="footer-credit">
+        Weather observations, WBGT, and lightning data are provided by
+        <a href="https://www.weatherstem.com/" target="_blank" rel="noopener">WeatherStem</a>.
+      </footer>
     </main>
 
     <script src="./app.js"></script>
