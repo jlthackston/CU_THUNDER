@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clemson Lightning Dashboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-label="Lightning status">
+        <div class="hero-copy">
+          <p class="eyebrow">Memorial Stadium Lightning Monitor</p>
+          <h1 id="statusTitle">Checking lightning...</h1>
+          <p id="statusText" class="lede">Waiting for the first WeatherStem reading.</p>
+        </div>
+        <div class="stadium-signal" id="stadiumSignal" aria-label="Simulated stadium light status">
+          <div class="signal-core">
+            <span id="signalLabel">Standby</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-grid" aria-label="Lightning dashboard">
+        <article class="metric primary">
+          <span class="metric-label">Closest strike</span>
+          <strong id="closestDistance">--</strong>
+          <span id="closestWindow">within 30 minutes</span>
+        </article>
+
+        <article class="metric">
+          <span class="metric-label">Approach trend</span>
+          <strong id="trendValue">--</strong>
+          <span id="trendDetail">Needs strike history</span>
+        </article>
+
+        <article class="metric">
+          <span class="metric-label">Alert level</span>
+          <strong id="alertLevel">--</strong>
+          <span id="alertDetail">Using stadium safety bands</span>
+        </article>
+
+        <article class="metric">
+          <span class="metric-label">Last update</span>
+          <strong id="lastUpdate">--</strong>
+          <span id="dataMode">Live mode</span>
+        </article>
+      </section>
+
+      <section class="panel-row">
+        <form class="panel controls" id="settingsForm">
+          <div class="panel-heading">
+            <h2>Settings</h2>
+            <button type="button" class="ghost" id="refreshNow">Refresh</button>
+          </div>
+
+          <label>
+            WeatherStem token
+            <input id="authToken" type="password" autocomplete="off" placeholder="Paste token for this browser" />
+          </label>
+
+          <div class="split">
+            <label>
+              Time window
+              <select id="timeWindow">
+                <option value="900">15 minutes</option>
+                <option value="1800" selected>30 minutes</option>
+                <option value="3600">60 minutes</option>
+              </select>
+            </label>
+
+            <label>
+              Study radius
+              <select id="studyRadius">
+                <option value="30">30 miles</option>
+                <option value="60" selected>60 miles</option>
+                <option value="100">100 miles</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="toggle-line">
+            <label class="toggle">
+              <input id="simulateMode" type="checkbox" />
+              <span>Simulation mode</span>
+            </label>
+            <span id="savedNotice">Token is stored only in this browser.</span>
+          </div>
+        </form>
+
+        <section class="panel activity" aria-label="Recent lightning strikes">
+          <div class="panel-heading">
+            <h2>Recent Strike Pattern</h2>
+            <span id="strikeCount">No strikes loaded</span>
+          </div>
+          <div class="strike-list" id="strikeList"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
