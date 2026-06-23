@@ -83,52 +83,7 @@
         </div>
       </section>
 
-      <section class="panel-row">
-        <form class="panel controls" id="settingsForm">
-          <div class="panel-heading">
-            <h2>Settings</h2>
-            <button type="button" class="ghost" id="refreshNow">Refresh</button>
-          </div>
-
-          <label>
-            Private proxy URL
-            <input id="proxyUrl" type="url" autocomplete="off" placeholder="https://your-worker.workers.dev" />
-          </label>
-
-          <label>
-            WeatherStem token for local testing
-            <input id="authToken" type="password" autocomplete="off" placeholder="Paste token for this browser" />
-          </label>
-
-          <div class="split">
-            <label>
-              Time window
-              <select id="timeWindow">
-                <option value="900">15 minutes</option>
-                <option value="1800" selected>30 minutes</option>
-                <option value="3600">60 minutes</option>
-              </select>
-            </label>
-
-            <label>
-              Study radius
-              <select id="studyRadius">
-                <option value="30">30 miles</option>
-                <option value="60" selected>60 miles</option>
-                <option value="100">100 miles</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="toggle-line">
-            <label class="toggle">
-              <input id="simulateMode" type="checkbox" />
-              <span>Simulation mode</span>
-            </label>
-            <span id="savedNotice">Use a proxy to keep the token hidden.</span>
-          </div>
-        </form>
-
+      <section class="panel-row single">
         <section class="panel activity" aria-label="Recent lightning strikes">
           <div class="panel-heading">
             <h2>Recent Strike Pattern</h2>
