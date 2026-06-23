@@ -240,6 +240,10 @@ h2 {
   gap: 14px;
 }
 
+.panel-row.single {
+  grid-template-columns: 1fr;
+}
+
 .legend {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
